@@ -37,12 +37,18 @@ grad = zeros(size(theta));
 %
 
 
+probabilities = sigmoid(X * theta);
 
+ones = find(y==1);
+zeros = find(y==0);
 
+theta_dis = theta((2:end),:);
 
+J = (sum(log(probabilities(ones))) + sum(log(1-probabilities(zeros)))) * (-1/(m)) + (theta_dis'*theta_dis)*(lambda/(2*m));
 
+errors = probabilities - y;
 
-
+grad = (sum(errors.*X) * 1/m)' + [0;(lambda/m)*theta_dis];
 
 
 % =============================================================
