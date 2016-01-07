@@ -62,9 +62,43 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+a1 = [ones(m,1) X]';
+
+z2 = Theta1 * a1;
+a2 = sigmoid(z2);
+a2_cols = size(a2,2);
+a2 = [ones(1,a2_cols); a2];
+
+z3 = Theta2 * a2;
+a3 = sigmoid(z3)';
+
+ID = eye(10);
+y_to_unary = ID(:,y)';
 
 
+for i = 1:10
+  v = y_to_unary(:,i);
+  ones = find(v==1);
+  zeros = find(v==0);
+  J =  J + (sum(log(a3(ones))) + sum(log(1-a3(zeros))));
+end
 
+J = J * (-1/m);
+
+error3 = (a3 - y_to_unary)';
+
+size(z2,2)
+
+SG = [ones(1,size(z2,2));(sigmoidGradient(z2))];
+
+error2 = (Theta2' * error3) .* SG;
+
+error2 = error2(2:end, :);
+
+for i = 1:m
+   Theta1_grad = Theta1_grad + error2(:,i) * a1(:,i)';
+   Theta2_grad = Theta2_grad + error3(:,i) * a2(:,i)';
+end
 
 
 
