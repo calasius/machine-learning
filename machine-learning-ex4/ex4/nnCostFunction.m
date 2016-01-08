@@ -69,27 +69,29 @@ a2 = sigmoid(z2);
 a2_cols = size(a2,2);
 a2 = [ones(1,a2_cols); a2];
 
+SG = [ones(1,size(z2,2));sigmoidGradient(z2)];
+
 z3 = Theta2 * a2;
 a3 = sigmoid(z3)';
 
-ID = eye(10);
+ID = eye(num_labels);
 y_to_unary = ID(:,y)';
 
 
-for i = 1:10
+for i = 1:num_labels
   v = y_to_unary(:,i);
   ones = find(v==1);
   zeros = find(v==0);
-  J =  J + (sum(log(a3(ones))) + sum(log(1-a3(zeros))));
+  J =  J + (sum(log(a3(ones,i))) + sum(log(1-a3(zeros,i))));
 end
 
-J = J * (-1/m);
+%regularized term
+reg_1 = (lambda/(2*m))*sum(sum(Theta1(:,2:end).*Theta1(:,2:end)));
+reg_2 = (lambda/(2*m))*sum(sum(Theta2(:,2:end).*Theta2(:,2:end)));
+
+J = J * (-1/m) + reg_1 + reg_2;
 
 error3 = (a3 - y_to_unary)';
-
-size(z2,2)
-
-SG = [ones(1,size(z2,2));(sigmoidGradient(z2))];
 
 error2 = (Theta2' * error3) .* SG;
 
@@ -100,26 +102,15 @@ for i = 1:m
    Theta2_grad = Theta2_grad + error3(:,i) * a2(:,i)';
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + lambda*Theta1(:,2:end);
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + lambda*Theta2(:,2:end); 
 
 % -------------------------------------------------------------
 
 % =========================================================================
 
 % Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
+grad = [(1/m)*Theta1_grad(:) ; (1/m)*Theta2_grad(:)];
 
 
 end
