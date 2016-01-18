@@ -4,7 +4,7 @@ from matplotlib.colors import ListedColormap
 from sklearn import datasets
 import numpy as np
 from sklearn.cross_validation import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from sklearn import svm
@@ -43,9 +43,13 @@ X = iris.data[:, [2, 3]]
 y = iris.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 sc = StandardScaler()
-sc.fit(X_train)
-X_train_std = sc.transform(X_train)
+X_train_std = sc.fit_transform(X_train)
 X_test_std = sc.transform(X_test)
+
+sr = RobustScaler()
+X_train_r = sr.fit_transform(X_train)
+X_test_r = sr.transform(X_test)
+
 # classifier = Perceptron(n_iter=40, eta0=0.1, random_state=0)
 classifier = svm.SVC(kernel='poly', degree=5, C=100)
 classifier.fit(X_train_std, y_train)

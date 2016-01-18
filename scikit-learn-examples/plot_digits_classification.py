@@ -19,7 +19,8 @@ print(__doc__)
 import matplotlib.pyplot as plt
 
 # Import datasets, classifiers and performance metrics
-from sklearn import datasets, svm, metrics
+from sklearn import datasets, metrics
+from sklearn.neural_network import BernoulliRBM
 
 # The digits dataset
 digits = datasets.load_digits()
@@ -43,13 +44,15 @@ n_samples = len(digits.images)
 data = digits.images.reshape((n_samples, -1))
 
 # Create a classifier: a support vector classifier
-classifier = svm.SVC(gamma=0.001)
+# classifier = svm.SVC(gamma=0.001)
+classifier = BernoulliRBM()
 
 # We learn the digits on the first half of the digits
 classifier.fit(data[:n_samples / 2], digits.target[:n_samples / 2])
 
 # Now predict the value of the digit on the second half:
 expected = digits.target[n_samples / 2:]
+classifier.predict(data[n_samples / 2:])
 predicted = classifier.predict(data[n_samples / 2:])
 
 print("Classification report for classifier %s:\n%s\n"
