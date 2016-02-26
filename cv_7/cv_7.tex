@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% "ModernCV" CV and Cover Letter
+% LaTeX Template
+% Version 1.1 (9/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Xavier Danaux (xdanaux@gmail.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Important note:
+% This template requires the moderncv.cls and .sty files to be in the same 
+% directory as this .tex file. These files provide the resume style and themes 
+% used for structuring the document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,a4paper,sans]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
+
+\moderncvstyle{classic} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{green} % CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage[spanish, activeacute]{babel} %Definir idioma español
+\usepackage[utf8]{inputenc} %Codificacion utf-8
+
+\usepackage[scale=0.75]{geometry} % Reduce document margins
+%\setlength{\hintscolumnwidth}{3cm} % Uncomment to change the width of the dates column
+%\setlength{\makecvtitlenamewidth}{10cm} % For the 'classic' style, uncomment to adjust the width of the space allocated to your name
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION SECTION
+%----------------------------------------------------------------------------------------
+
+\firstname{Claudio} % Your first name
+\familyname{Gauna} % Your last name
+
+% All information in this block is optional, comment out any lines you don't need
+\title{Curriculum Vitae}
+\address{Asunci\'on 5378}{Villa Devoto, CABA 1417}
+\mobile{(011) 1564602724}
+\email{calasius@gmail.com}
+\photo[70pt][0.4pt]{claudio-formal.jpg} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
+\quote{"Computer science is  no more about computers than Astronomy is about telescopes" - E. W. Dijkstra (1930-2002)}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\makecvtitle % Print the CV title
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Educaci\'on}
+
+\cventry{2006—En curso}{Ciencias de la Computaci\'on}{Universidad de Ciencias Exactas de Buenos Aires}{CABA}{Cursando materias optativas (Reconocimientos de patrones)}{}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Experiencia}
+
+\subsection{Laboral}
+\cventry{Agosto 2014--Actualmente}{Programador Java}{Despegar}{\textsc{Despegar Autos}}{CABA}{Participación en mejoras de perfomance del servicio encargado de realizar b\'usquedas de autos. Para encontrar las partes débiles del servicio utilice las herramientas de newrelic para grabar métricas de las partes del código mas relevantes y newrelic inshigts para analizar las distribuciones y percentiles de los tiempos de las distintas partes. Esto nos permitió reconocer partes del código que se podían ejecutar asíncronamente en threads distintos. Este servicio cuenta con una base de datos Cassandra donde se guardan las búsquedas con una clave. Las métricas de new relic me permitieron ver que la serialización de la búsqueda estaba tardando mucho y el tamaño de la respuesta serializada crecía demasiado, esto lo pude resolver utilizando otra librería de serialización que me permitía copiar un objeto de forma rápida, para luego realizar de forma asincrónica la persistencia de la búsqueda con una serialización mas liviana a nivel tamaño.\\
+Pasamos a java 8 utilizando expresiones lambda en lugares donde merecían ser utilizadas y el api de streams secuecial y paralelo para mejorar performace de calculos sobre colecciones grandes.\\
+El servicio de búsqueda de autos consume un servicio hecho en Scala para obtener los mejores precios por region, país, categoría de auto,.., etc. Tuve que programar en lenguaje funcional mejoras de este servicio y agregar nuevas estadísticas. Para aprender Scala realice dos cursos en Coursera "Functional Programming priciples in scala y Principles of reactive programming".\\
+Siempre busco de aplicar estructura de datos o algoritmos para resolver mejor un determinado problema, por ejemplo, en cierta parte del servicio de autos se necesitaba tener armada un tipo de estructura de clases de equivalencia y luego saber si dos elementos estaban relacionados, eso lo pude implementar usando union and find, una estructura de datos muy utilizada en muchos algoritmos.\\
+También tuve que resolver problemas geométricos dada un lista de polígonos que representan zonas de ciudades averiguar eficientemente a que zona pertenecen un par de coordenadas. Existia un servicio que hacia esto pero las coordenadas eran muy variadas y convenía hacer una sola llamada para obtener las zonas de una determinada ciudad y luego ejecutar al algoritmo.\\
+Investigación de elasticsearch y cliente java para luego reemplazar mongodb.
+}
+\cventry{2012—Julio 2014}{Programador Java}{EPIDATA Consulting}{\textsc{Agea Clarin}}{CABA}{Participaci\'on en la ampliaci\'on del sitema de publicidades de Clarin. Mis tareas fueron realizar un web service rest utilizando Spring, Spring data, Spring security, JPA, Hibernate y librerias para comunicaci\'on con un sistema SAP. \\
+Utilic\'e maven para la creaci\'on del proyecto. \\
+El proyecto hace uso de otros web services con tecnolog\'ia SOAP. Cre\'e un modulo maven para todos estos web services y la generaci\'on es autom\'atica utilizando un plugin de maven que realiza esta tarea \\
+La base de datos la gener\'e a partir de las anotaciones de JPA en las entidades en SQl Server.\\
+Spring security lo utilic\'e para poder autenticar al usuario contra un servicio dedicado a esta tarea. Este servicio brinda informaci\'on de usuarios registrados incluyendo los roles, que los utiliz\'e para validar que el usuario tenga permisos para ejecutar el servicio Rest. Esto lo logr\'e extendiendo algunas clases del framework Spring Security.\\
+Otro uso que le d\'i a Spring Security fue encriptar los datos de usuario y contrase\~na que viajan en el encabezado de los servicios.\\
+Dentro del proyecto cre\'e un modulo maven dedicado a implementar un cliente rest utilizando el framework Jersey, de esta forma los que quieran consumir el servicio incluyen la dependencia a este modulo y ya tienen disponible un cliente.\\
+Este proyecto se termina empaquetando en un archivo .war y se hace deploy en un servidor tomcat 7.\\
+Creaci\'on de nuevas interfaces graficas utilizando c\'odigo Swing generado a mano y utilizando un plugin de eclipse para generar Pantallas WYSIWYG.\\
+Otras aplicaciones utilizan EJB3, seam, icefaces para la capa de presentaci\'on sobre jboss 4.3. Las aplicaciones tienen por lo general una arquitectura de cuatro capas: Facade, Manager, Helper y Dao. Tuve que realizar cosas en todas las capas.
+}
+
+%------------------------------------------------
+
+\cventry{2010--2012}{Programador java}{Tecnologias Racionales}{\textsc{Agea Clarin}}{CABA}{Desarrollo de web service para sistema de login utilizado para loquear usuarios desde diferentes aplicaciones. 
+Se utiliz\'o oracle como base de datos, Jboss EAP 6, apache cxf para implementar el encriptado de los pedidos y los resultados, jax-ws para el web service. Se utiliz\'o maven para la creaci\'on y manejo de dependencias.\\
+Tambi\'en hice mejoras al sistema de b\'usqueda sobre un archivo de Clar\'in, este busca contenido sobre el archivo hist\'orico de Clar\'in. Mi tarea fu\'e mejorar la performance de las b\'usquedas de grandes rangos de fecha. 
+Se tuvo que particionar la base de datos oracle por fecha y la b\'usqueda por software.\\
+Tambi\'en realic\'e tareas de mantenimiento de otras aplicaciones que utilizan las mismas tecnologias.
+}
+
+\cventry{2008--2010}{Programador java}{Tecnologias Racionales}{\textsc{Agea Clarin}}{CABA}{Desarrollo de sistema para estructurar los PDF de los distintos productos que salen a papel. La aplicaci\'on permite mediante una libreria (PDFTron) hacer un an\'alisis de la estructura del PDF y poder averiguar los tipos de objetos que este contiene. De esta forma podemos marcar las notas que estos PDF contienen marcando luego por pantalla la geometria de estas notas y la geometria de todas las partes constituyentes de las notas (ej: T\'itulo, bajada, fotos, ep\'igrafes, cr\'editos, etc.) Mi trabajo fue realizar un algoritmo que permita hacer esto de forma autom\'atica para reducir el trabajo del usuario al marcar las partes constituyentes de las notas. Una vez que esta marcadas las notas se genera un XML especial llamado newsml. Es un standar para generar noticias.
+Manej\'e distintas librer\'ias para crear y analizar XML. Tambi\'en program\'e con lenguaje XSLT para crear otros xml con los newsml de noticias. \\
+La aplicaci\'on es J2EE que corre en Jboss utilizamos Hibernate mediante anotaciones en clases para manejar la persistencia. La aplicaci\'on tiene una parte web donde utilizamos JSF y jboss seam.
+}
+
+\cventry{2007--2008}{Programador java}{Tecnologias Racionales}{\textsc{Agea Clarin}}{CABA}{Elaboraci\'on de un sistema de ventas para celulares BlackBerry. Este consist\'ia de toda la
+parte gr\'afica mas la implementaci\'on de un cliente a un web service con Ksoap y la codificaci\'on
+del web service deployado en Jboss 4.3. \\
+Sistemas de publicidad y subida de Materiales tanto web como desktop utilizado en las agencias de de Clarin para subir el contenido de las publicidades en papel. Las tecnolog\'ias utilizadas fueron Framework Jboss Seam, IceFaces(JSF), JBoss 4.3
+Application server,EJB 3,Hibernate, Java Web services, Swing, SQLServer.
+}
+
+\cventry{2006--2007}{Test Autom\'aticos}{Tecnologias Racionales}{\textsc{Synapsis}}{CABA}{En este lugar me dedique a la robotizaci\'on de una aplicaci\'on web hecha en java, para la empresa
+CODENSA S.A, que tiene por objeto la distribuci\'on y comercialización de la energ\'ia el\'ectrica en Colombia. Para automatizar casos de prueba utilizamos el Robot de Rational el cual generaba
+un script en lenguaje Basic. Mi tarea era agregar c\'odigo a los scripts para poder trabajar con
+mas datos y poder generar unos reportes de c\'omo pasaron los casos de prueba.
+}
+
+\section{Certificaciones}
+\cvitem{Coursera Machine Learning}{\url{https://www.coursera.org/account/accomplishments/records/TXJVAPHAEPH6}}
+
+%------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	COMPUTER SKILLS SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Conocimientos}
+
+\cvitem{Avanzado}{\textsc{java}}
+\cvitem{Intermediate}{\textsc{Scala},\textsc{akka},\textsc{reactive mongo},\textsc{spray for scala rest},\textsc{python}, \textsc{C++}, \LaTeX, OpenOffice, Linux, Microsoft Windows}
+\cvitem{}{Librerías Java para resolución de problemas sobre grafos}
+\cvitem{}{Estudiando Octave y R para resolver problemas estadísticos relacionado con reconocimientos de patrones.}
+%----------------------------------------------------------------------------------------
+%	LANGUAGES SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Idiomas}
+
+\cvitemwithcomment{Ingles}{Avanzado}{Escritura, lectura, estudiando para reforzar el habla}
+
+%----------------------------------------------------------------------------------------
+%	INTERESTS SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Intereses}
+
+\renewcommand{\listitemsymbol}{-~} % Changes the symbol used for lists
+
+\cvlistdoubleitem{Dise\~no de algoritmos}{Complejidad de Algoritmos}
+\cvlistdoubleitem{Metaheuristicas}{Programaci\'on Concurrente y Paralela}
+\cvlistdoubleitem{Redes Neuronales}{Machile Learning Algorithms}
+%----------------------------------------------------------------------------------------
+
+\end{document}
